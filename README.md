@@ -1,4 +1,4 @@
-# 안녕하세요, 김하늘입니다 👋
+# 안녕하세요, 홍길동입니다 👋
 
 백엔드 개발을 중심으로 데이터 파이프라인까지 다루는 3년 차 개발자입니다.
 "잘 돌아가는 코드"보다 "내일의 내가 읽을 수 있는 코드"를 지향합니다.
@@ -44,8 +44,8 @@
 
 ## 📫 Contact
 
-- Email: haneul.dev@example.com
-- Blog: https://example.com/haneul
+- Email: gildong.dev@example.com
+- Blog: https://example.com/gildong
 - GitHub: https://github.com/example
 
 ---
