@@ -236,15 +236,28 @@ const ROOT = (git('rev-parse', '--show-toplevel') || '.').trim();
     record('unassigned_rid', '유예', 'SKIP', 'SPEC.md 가 없다', [],
       '대조 기준 없이 낸 통과는 근거가 없다.');
   } else {
-    const rids = [...new Set(
-      outsideFence(specText)
-        .filter(l => /^\s*\|/.test(l))
-        .flatMap(l => [...l.matchAll(/R-\d{3}/g)].map(m => m[0]))
-    )].sort();
+    // 상태 칸이 '계획' 인 행은 아직 구현하지 않은 요구다. 검증 수단을 묻지 않는다.
+    // 이 칸이 없으면 SPEC 의 모든 R-ID 가 검증될 때까지 게이트가 FAIL 이고, 그러면
+    // 마지막 단계 전에 어떤 단계도 닫을 수 없다 — 게이트가 단계 문지기 역할을 못 한다.
+    // SPEC.md 는 사람만 고치는 파일이므로 모델이 이 칸을 옮겨 검사를 피할 수 없다.
+    // v1 에서는 이 검사가 PROGRESS.md 로 충족되어 죽어 있었기 때문에 이 문제가 안 드러났다.
+    const planned = new Set();
+    const all = new Set();
+    for (const line of outsideFence(specText)) {
+      if (!/^\s*\|/.test(line)) continue;
+      const found = [...line.matchAll(/R-\d{3}/g)].map(m => m[0]);
+      if (!found.length) continue;
+      const isPlanned = /\|\s*계획\s*\|/.test(line);
+      for (const r of found) { all.add(r); if (isPlanned) planned.add(r); }
+    }
+    const rids = [...all].filter(r => !planned.has(r)).sort();
 
-    if (rids.length === 0) {
+    if (all.size === 0) {
       record('unassigned_rid', '유예', 'FAIL', 'SPEC.md 의 R-ID 가 0개', [],
         '요구가 없으면 무엇을 검증할지 정의되지 않는다. 기능 표를 먼저 채워라. (2자리 R-01 은 인식하지 않는다)');
+    } else if (rids.length === 0) {
+      record('unassigned_rid', '유예', 'PASS',
+        `미배정 R-ID 0 / 0개 (전체 ${all.size}개가 전부 '계획' 상태다)`);
     } else {
       const haystacks = [];
       for (const name of CONFIG.ridEvidence) {
@@ -262,9 +275,9 @@ const ROOT = (git('rev-parse', '--show-toplevel') || '.').trim();
       if (missing.length === 0) {
         record('unassigned_rid', '유예', 'PASS', `미배정 R-ID 0 / ${rids.length}개`);
       } else {
-        record('unassigned_rid', '유예', 'FAIL', `미배정 R-ID ${missing.length} / ${rids.length}개`,
+        record('unassigned_rid', '유예', 'FAIL', `미배정 R-ID ${missing.length} / ${rids.length}개 (구현 상태 기준, 전체 ${all.size}개)`,
           missing.map(r => `${r} — 검증 수단이 없다`),
-          `REGRESSION.md 항목 / CHECKS.md 항목 / 테스트 중 최소 1곳이 그 R-ID 를 참조하게 만들어라. PROGRESS.md 에 적는 것은 검증이 아니다.`);
+          `REGRESSION.md 항목 / CHECKS.md 항목 / 테스트 중 최소 1곳이 그 R-ID 를 참조하게 만들어라. PROGRESS.md 에 적는 것은 검증이 아니다. 아직 구현 전이라면 SPEC.md 의 상태 칸이 "계획" 이어야 한다 — 그 칸은 사람만 옮긴다.`);
       }
     }
   }
