@@ -1,5 +1,0 @@
-node_modules/
-runs/
-audit-tree/
-data/*.json
-*.log
