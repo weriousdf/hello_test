@@ -10,6 +10,9 @@ test_game/
 # 별도 저장소로 관리되는 Todo 앱 (github.com/weriousdf/todo_list)
 todo_list/
 
+# 별도 저장소로 관리되는 Claude Code 스킬 모음 (github.com/weriousdf/my-skills)
+my-skills/
+
 # 비밀값과 로컬 DB — 절대 커밋하지 않는다
 .env
 .env.local
