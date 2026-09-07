@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>할 일</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>할 일</h1>
+
+    <form id="add-form" autocomplete="off">
+      <div class="row">
+        <input id="title" name="title" placeholder="할 일을 입력하세요" aria-label="할 일 제목" required>
+        <button type="submit">추가</button>
+      </div>
+      <div class="row sub">
+        <label>마감일 <input id="due" name="due" type="date" aria-label="마감일"></label>
+        <input id="tags" name="tags" placeholder="태그 (쉼표로 구분: 공부, 급함)" aria-label="태그">
+      </div>
+      <p id="form-error" class="error" role="alert" hidden></p>
+    </form>
+
+    <nav class="filters" aria-label="필터">
+      <button type="button" class="chip on" data-filter="all">전체</button>
+      <button type="button" class="chip" data-filter="today">오늘</button>
+      <button type="button" class="chip" data-filter="open">미완료</button>
+      <button type="button" class="chip" data-filter="done">완료</button>
+      <input id="search" type="search" placeholder="검색" aria-label="검색">
+    </nav>
+
+    <div id="tag-bar" class="filters tags" aria-label="태그 필터"></div>
+
+    <p id="status" class="status" role="status"></p>
+    <ul id="list" class="list"></ul>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

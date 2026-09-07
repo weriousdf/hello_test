@@ -1,0 +1,18 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "로컬 SQLite 파일 하나에 저장하는 Todo 앱",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "db:check": "node --env-file-if-exists=.env src/db-check.js",
+    "api:check": "node --env-file-if-exists=.env src/api-check.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
