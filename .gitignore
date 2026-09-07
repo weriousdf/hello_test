@@ -6,3 +6,19 @@ test_game/
 
 # 별도 저장소로 관리되는 게임 과제 (github.com/weriousdf/260902_game_assignments)
 260902_game_assignments/
+
+# 별도 저장소로 관리되는 Todo 앱 (github.com/weriousdf/todo_list)
+todo_list/
+
+# 비밀값과 로컬 DB — 절대 커밋하지 않는다
+.env
+.env.local
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# 의존성과 가상환경
+node_modules/
+.venv/
+__pycache__/
