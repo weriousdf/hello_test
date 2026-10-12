@@ -16,6 +16,9 @@ my-skills/
 # 별도 저장소로 관리되는 한결 글로벌문서 센터 (github.com/weriousdf/HG_global_center)
 HG_global_center/
 
+# 별도 저장소로 관리되는 포즈 과제 (github.com/weriousdf/pose-image-tool)
+260920_hw_pose/
+
 # 비밀값과 로컬 DB — 절대 커밋하지 않는다
 .env
 .env.local
@@ -28,3 +31,13 @@ HG_global_center/
 node_modules/
 .venv/
 __pycache__/
+260921_hw_3d/
+
+# 별도 저장소로 관리되는 Main Quest 2 (github.com/weriousdf/scan-pdf-sorter-poc)
+260924_Main_Quest_02/
+
+# 해커톤 팀 프로젝트 (팀 저장소 github.com/ctaleez51-art/sales-analysis 를 하위 폴더에 내려받아 사용)
+260928_프로젝트/
+
+# 별도 저장소로 관리되는 261012 실습·과제 (github.com/weriousdf/261012-tool-lab, 과제는 weriousdf/my-service-agent)
+261012_과제/
